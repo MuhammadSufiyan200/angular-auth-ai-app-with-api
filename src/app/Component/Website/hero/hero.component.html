@@ -1,0 +1,21 @@
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let slide of slides">
+      <div
+        class="d-flex flex-column justify-content-center align-items-center text-white text-center p-4 rounded w-100 h-100"
+        [ngStyle]="{
+          'background-image': 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' + slide.image + ')',
+          'background-size': 'cover',
+          'background-position': 'center'
+        }"
+      >
+        <h1 class="display-5 fw-bold mb-3 text-shadow">{{ slide.title }}</h1>
+        <p class="lead mb-4 text-shadow">{{ slide.subtitle }}</p>
+        <button class="btn order-now-btn px-4 py-2 rounded-pill">Order Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>

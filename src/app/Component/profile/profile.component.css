@@ -1,0 +1,10 @@
+/* Ensures it fits nicely inside the Admin Layout without breaking layout */
+.content-wrapper {
+  padding: 10px 20px;
+}
+
+.container-fluid {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}

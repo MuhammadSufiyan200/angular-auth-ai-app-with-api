@@ -1,0 +1,163 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<br>
+<div class="container">
+  <!-- Create / Update Form Card -->
+  <div class="card p-3 mb-3">
+    <fieldset class="border p-4">
+      <!-- Legend aligned with border -->
+      <legend class="w-auto px-1 mb-3" style="font-size: 1.25rem;">
+        <span style="color: red;">{{ isEditMode ? 'Update' : 'Create' }} Inventory Item</span>
+      </legend>
+
+      <!-- Form Start -->
+      <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()">
+        <!-- First Row: Item ID, Item Name, Price -->
+        <div class="row mb-3">
+          <div class="col-md-2">
+            <label for="ItemInventoryId" class="form-label">Item ID</label>
+            <input
+              type="text"
+              id="ItemInventoryId"
+              class="form-control"
+              formControlName="iteminventoryId"
+              placeholder="Auto-generated ID"
+              [readonly]="true"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="itemName" class="form-label">Item Name</label>
+            <input
+              type="text"
+              id="itemName"
+              class="form-control"
+              formControlName="itemName"
+              placeholder="Enter Item Name"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              id="price"
+              class="form-control"
+              formControlName="price"
+              placeholder="Enter Price"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="formFileSm" class="form-label">Image(for card)</label>
+            <input class="form-control form-control-sm" formControlName="filepath" id="formFileSm" type="file" (change)="onFileSelected($event)">
+            <!-- <input type="file" class="form-control" formControlName="filepath"  /> -->
+          </div>
+        </div>
+
+        <!-- Second Row: Stock Quantity, Item Category (DDL), Unit (DDL) -->
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <label for="stockQuantity" class="form-label">Stock Quantity</label>
+            <input
+              type="number"
+              id="stockQuantity"
+              class="form-control"
+              formControlName="stockQuantity"
+              placeholder="Enter Stock Quantity"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="itemCategoryId" class="form-label">Item Category</label>
+            <ng-select
+                [items]="itemCategories"
+                bindLabel="categoryName"
+                bindValue="itemCategoryId"
+                formControlName="itemCategoryId"
+                placeholder="Select Category"
+           
+                [searchable]="true"
+                [clearable]="true"
+                [dropdownPosition]="'bottom'">
+            </ng-select>
+          </div>
+          <div class="col-md-4">
+            <label for="unitId" class="form-label">Unit</label>
+            <ng-select
+                [items]="units"
+                bindLabel="unitName"
+                bindValue="unitId"
+                placeholder="Select a unit"
+                formControlName="unitId"
+                [searchable]="true"
+                [clearable]="true"
+                [dropdownPosition]="'auto'"
+                >
+            </ng-select>
+          </div>
+        </div>
+
+        <!-- Buttons Row -->
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary me-2" [disabled]="inventoryForm.invalid">
+            {{ isEditMode ? 'Update Inventory Item' : 'Add Inventory Item' }}
+          </button>
+          <!-- Agar edit mode mein cancel button chahiye to -->
+          <button *ngIf="isEditMode" type="button" class="btn btn-secondary" (click)="cancelEdit()">
+            Cancel
+          </button>
+        </div>
+      </form>
+      <!-- Form End -->
+    </fieldset> 
+  </div>
+
+  <!-- Grid for Inventory Items (Adjusted separately) -->
+  <div class="card p-4" style="max-height: 400px; max-width: 100%; overflow-y: auto; overflow-x: auto;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <legend class="w-auto px-1 mb-0" style="font-size: 1.25rem;">Item Inventory List</legend>
+      <!-- Search Bar -->
+      <input
+        class="form-control w-50"
+        (keyup)="applyFilter($event)"
+        placeholder="Search by values"
+      />
+    </div>
+
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark  sticky-top">
+          <tr>
+            <th style="width: 5%;">#</th>
+            <th style="width: 15%;">Item Name</th>
+            <th style="width: 10%;">Price</th>
+            <th style="width: 15%;">Stock Quantity</th>
+            <th style="width: 20%;">Category Name</th>
+            <th style="width: 20%;">Unit Name</th>
+            <th style="width: 15%;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inven of filteredUsers">
+            <td>{{ inven.id }}</td>
+            <td>{{ inven.itemName }}</td>
+            <td>{{ inven.price }}</td>
+            <td>{{ inven.stockQuantity }}</td>
+            <td >{{ inven.categoryName }}</td>
+            <td>{{ inven.unitName }}</td>
+            <td>
+                <div class="d-flex flex-wrap gap-1">
+                    <button class="btn btn-sm btn-warning me-2" (click)="edititeminven(inven)">
+                        Edit
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteItemInven(inven.id)">
+                        Delete
+                    </button>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="itemCategories.length === 0" class="text-center text-muted mt-3">
+      No categories found.
+    </div>
+  </div>
+</div>

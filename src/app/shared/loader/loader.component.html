@@ -1,0 +1,9 @@
+<div class="loader-overlay" *ngIf="loading$ | async">
+  <div class="grid-loader">
+    <div
+      class="block"
+      *ngFor="let index of blocks; let i = index"
+      [style.animation-delay]="(i * 0.1) + 's'"
+    ></div>
+  </div>
+</div>

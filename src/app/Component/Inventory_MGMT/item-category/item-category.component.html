@@ -1,0 +1,94 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<br>
+<div class="container">
+    <!-- Create / Update Form -->
+    <div class="card p-3 mb-3">
+      <legend class="w-auto px-1" style="padding-top: 0px;"><span style="color: red;">{{ isEditMode ? 'Update' : 'Create' }} Item Category</span></legend>
+
+      <fieldset class="border p-4" style="padding-top: 5px;">
+    
+        <form [formGroup]="itemCategoryForm" (ngSubmit)="onSubmit()">
+          <div class="mb-1">
+            <label for="categoryId" class="form-label">Category ID</label>
+            <input
+              type="text"
+              id="categoryId"
+              class="form-control"
+              formControlName="itemCategoryId"
+              placeholder="Auto-generated ID"
+              [readonly]="true" 
+            />
+          </div>
+    
+          <div class="mb-3">
+            <label for="categoryName" class="form-label">Category Name</label>
+            <input
+              type="text"
+              id="categoryName"
+              class="form-control"
+              formControlName="categoryName"
+              placeholder="Enter Category Name"
+            />
+            <div *ngIf="itemCategoryForm.get('categoryName')?.invalid && itemCategoryForm.get('categoryName')?.touched" class="text-danger">
+              Category Name is required.
+            </div>
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="itemCategoryForm.invalid">
+              {{ isEditMode ? 'Update' : 'Create' }}
+            </button>
+            <button *ngIf="isEditMode" type="button" class="btn btn-secondary" (click)="cancelEdit()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+    
+  
+    <!-- Grid for Categories -->
+    <!-- Grid for Categories -->
+    <div class="card p-4" style="max-height: 400px; overflow-y: auto;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <legend class="w-auto px-1" style="padding-top: -1px;">Item Categories List</legend>
+    
+        <!-- Search Bar -->
+        <input
+          class="form-control w-50"
+          (keyup)="applyFilter($event)"
+          placeholder="Search by Category Name"
+        />
+      </div>
+
+
+        <table class="table table-bordered table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th style="width: 5%;">#</th>
+              <th style="width: 70%;">Category Name</th>
+              <th style="width: 25%;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of filteredUsers">
+              <td>{{ category.itemCategoryId }}</td>
+              <td>{{ category.categoryName }}</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-2" (click)="editCategory(category)">
+                  Edit
+                </button>
+                <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.itemCategoryId)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="itemCategories.length === 0" class="text-center text-muted mt-3">
+          No categories found.
+        </div>
+      </div>
+
+</div>
+  

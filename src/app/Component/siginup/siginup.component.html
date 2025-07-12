@@ -1,0 +1,46 @@
+<div class="login-parent">
+  <div class="login-form-container">
+
+    <h1 class="login-title text-center mb-2 fw-bold">
+      <img src="assets/account.png" alt="Logo" width="40" height="40" class=" align-middle"> Signup
+    </h1>
+
+    <form [formGroup]="Siginup" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="fullname" class="form-label">FULL NAME</label>
+        <input id="fullname" type="text" formControlName="FullName" class="form-control login-input" placeholder="Enter your full name" />
+        <div *ngIf="Siginup.controls['FullName'].invalid && Siginup.controls['FullName'].touched" class="text-danger mt-1 small">
+          Full Name is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">EMAIL</label>
+        <input id="email" type="email" formControlName="Email" class="form-control login-input" placeholder="Enter your email" />
+        <div *ngIf="Siginup.controls['Email'].invalid && Siginup.controls['Email'].touched" class="text-danger mt-1 small">
+          Valid email is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">PASSWORD</label>
+        <input id="password" type="password" formControlName="PasswordHash" class="form-control login-input" placeholder="Enter your password" />
+        <div *ngIf="Siginup.controls['PasswordHash'].invalid && Siginup.controls['PasswordHash'].touched" class="text-danger mt-1 small">
+          Password is required.
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn mb-3" [disabled]="Siginup.invalid">Signup</button>
+
+      <div class="text-center">
+        <p>Already have an account? 
+          <a href="javascript:void(0);" (click)="goToLogin()" class="login-link" style="text-decoration: underline solid;">Login</a>
+        </p>
+      </div>
+
+      <marquee behavior="scroll" direction="left" scrollamount="6" style="color: #836d6d; font-weight: bold; font-size: 1.2rem;">
+        🚀 Join Foodies Hub today! Delicious meals await you! 🍔🍕🍟
+      </marquee>
+    </form>
+  </div>
+</div>

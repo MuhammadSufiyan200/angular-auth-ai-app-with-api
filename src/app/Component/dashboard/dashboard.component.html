@@ -1,0 +1,58 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- <h2>Welcome to Dashboard! 🎉{{Token}}</h2>
+<p>You are logged in successfully.</p> -->
+
+<!-- <button (click)="logout()">Logout</button> -->
+<div class="dashboard">
+    <!-- Sidebar -->
+    <!-- Sidebar -->
+    <div class="h-screen overflow-auto">
+  <aside class="sidebar">
+    <h2 class="logo">⚡ Auth System</h2>
+    <hr> <!-- Horizontal Line -->
+    <ul class="nav-links">
+      <li><a routerLink="/admin"> <span class="material-icons">dashboard</span> Dashboard</a></li>
+      <li><a routerLink="/admin/profile">  <span class="material-icons">person</span> Profile</a></li>
+      <li><a routerLink="/admin/users"><span class="material-icons">groups</span> Users</a></li>
+      <li><a routerLink="/admin/Active"><span class="material-icons">history</span>Active Session</a></li>
+      <li><a routerLink="/admin/System"> <span class="material-icons">computer</span> System Log</a></li>
+      <hr>
+      <li (click)="toggleInventoryDropdown()" style="cursor:pointer;">
+        <a><span class="material-icons">dashboard</span> Inventory Management <i [class]="inventoryDropdownOpen ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" style="float: right;"></i></a>
+      </li>
+      <ul class="sub-links" *ngIf="inventoryDropdownOpen">
+        <li><a routerLink="/admin/Item_Category"><span class="material-icons">category</span>Item Categories</a></li>
+        <li><a routerLink="/admin/Item_Inventory">Inventory Items</a></li>
+        <li><a routerLink="/admin/Unit">Units</a></li>
+      </ul>
+      
+      
+    </ul>
+
+    <!-- Logout Button (Inside Sidebar, Fixed at Bottom) -->
+    <button class="logout-btn" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+
+    
+  </aside>
+    </div>
+    <!-- Main Content -->
+    <main class="main-content">
+      
+      <header class="topbar">
+        <h2>Admin Dashboard</h2>
+        <div class="user-info">
+          <i class="fas fa-user-circle"></i>
+          <span>{{ UserNames }}</span>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <router-outlet>
+        </router-outlet>
+      </div>
+  </main>
+  </div>
+  

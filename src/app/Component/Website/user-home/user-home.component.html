@@ -1,0 +1,165 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!-- Add inside your component or index.html -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const navbar = document.querySelector('.navbar');
+    const toggleBtn = document.querySelector('.menu-toggle');
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        navbar.classList.toggle('open');
+      });
+    }
+  });
+</script>
+
+<div class="main-container">
+  <app-navbar></app-navbar>
+  <!-- Banner Section -->
+  <div class="hero-section min-vh-90 d-flex align-items-center px-5 text-white position-relative"
+    style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url('/assets/hero.jpg') center center/cover no-repeat; margin-top: 5px; border-radius: 10px 10px 40px 40px;">
+
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <!-- Hero Content -->
+        <div class="col-lg-6 animate__animated animate__fadeInUp">
+          <h1 class="display-3 fw-bold mb-3">Delicious Meals Delivered to You</h1>
+          <p class="lead fs-4 mb-4" style="max-width: 600px;">Order your favorite food anytime, anywhere</p>
+          <button class="order-now-btn btn-lg rounded-pill px-4 py-3">Order Now</button>
+        </div>
+
+        <!-- Hero Slider -->
+        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+          <app-hero class="w-100 h-100"></app-hero>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+  <!-- Categories -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold">Browse by Category</h2>
+      <p class="text-center mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ullam omnis reprehenderit voluptatum quisquam nam,
+         ea voluptatem labore debitis est. Animi asperiores laboriosam quaerat neque eligendi exercitationem aspernatur voluptates. Eveniet.</p>
+      <div class="category-grid">
+        <div *ngFor="let category of categories" class="category-card" (click)="onCategorySelected(category.id)">
+          <div class="card h-100 border-0 overflow-hidden position-relative" (click)="onCategorySelected(category.id)"
+            style="border-radius: 20px; cursor: pointer;">
+            <div class="card-img-top ratio ratio-1x1">
+              <img [src]="category.imageUrl" class="card-img position-absolute h-100 w-100"
+                style="object-fit: cover; z-index: 1;" alt="{{ category.categoryName }}">
+            </div>
+            <div class="category-body position-absolute bottom-0 start-0 end-0 p-2"
+              style="z-index: 2; background: rgba(0,0,0,0.7); border-radius: 0 0 20px 20px;">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-1">
+                  <img [src]="category.icon" width="40" height="40" class="rounded-circle bg-white p-1 shadow-sm">
+                  <h5 class="mb-0 fw-bold text-white">{{category.categoryName}}</h5>
+                </div>
+
+                <button
+                  class="order-now-btn rounded-circle p-3 d-flex align-items-center justify-content-center gap-2"
+                  style="width: 36px; height: 38px;">
+                  <i class="fas fa-arrow-right fs-6"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold display-5">Featured Products</h2>
+      <p class="text-center mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ullam omnis reprehenderit voluptatum quisquam nam,
+         ea voluptatem labore debitis est. Animi asperiores laboriosam quaerat neque eligendi exercitationem aspernatur voluptates. Eveniet.</p>
+      <div cla  ss="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" *ngIf="isLoading">
+        <div class="col" *ngFor="let i of [1,2,3,4]">
+          <div class="card h-100 border-0 shadow position-relative overflow-hidden" style="border-radius: 15px;">
+            <div class="skeleton-img ratio ratio-1x1 bg-secondary bg-opacity-10"></div>
+            <div class="card-body">
+              <div class="skeleton-text w-100 bg-secondary bg-opacity-10 rounded" style="height: 20px;"></div>
+              <div class="skeleton-text short w-50 mt-2 bg-secondary bg-opacity-10 rounded" style="height: 20px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" *ngIf="!isLoading">
+        <div class="col" *ngFor="let product of featuredProducts">
+          <div class="card h-100 border-0 shadow position-relative overflow-hidden product-card"
+            style="border-radius: 15px;" data-aos="fade-up">
+             <img [src]="product.imageUrl || 'assets/default-product.jpg'" class="card-img-top object-fit-cover"
+              style="height: 250px; transition: transform 0.3s ease;" alt="{{ product.itemName }}">
+            <button class="btn btn-warning position-absolute top-3 end-3 shadow"
+              style="opacity: 0; transition: all 0.3s ease; z-index: 2;" (click)="addToCart(product)">
+              <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+            </button>
+            <div class="rating-overlay">
+              <i class="fas" *ngFor="let star of stars; let i = index" [ngClass]="{
+              'fa-star': i < (product.hoverRating || product.currentRating),
+              'fa-star-o': i >= (product.hoverRating || product.currentRating),
+              'highlighted': i < product.hoverRating,
+              'clicked': product.showClickEffect
+            }" (mouseenter)="product.hoverRating = i + 1" (mouseleave)="product.hoverRating = 0"
+                (click)="setRating(product, i + 1)"></i>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title fs-6">{{ product.itemName }}</h3>
+               <div class="d-flex justify-space-between align-items-center mt-2 ">
+                <p class="price mb-0 fw-bold">RS:{{ product.price }}</p>
+                <div class="quantity-control">
+                  <button (click)="decreaseQuantity(product)">-</button>
+                  <span>{{ product.quantity }}</span>
+                  <button (click)="increaseQuantity(product)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+ 
+
+
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-5 fw-bold display-5">Why Choose Us?</h2>
+      <p class="text-center mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ullam omnis reprehenderit voluptatum quisquam nam,
+         ea voluptatem labore debitis est. Animi asperiores laboriosam quaerat neque eligendi exercitationem aspernatur voluptates. Eveniet.</p>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-4 rounded-3 shadow-sm text-center h-100">
+            <i class="fas fa-shipping-fast fa-3x mb-3 text-light"></i>
+            <h4 class="fw-bold">Fast Delivery</h4>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-3 shadow-sm text-center h-100">
+            <i class="fas fa-leaf fa-3x mb-3 text-warning"></i>
+            <h4 class="fw-bold">Fresh Ingredients</h4>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-3 shadow-sm text-center h-100">
+            <i class="fas fa-credit-card fa-3x mb-3 text-info"></i>
+            <h4 class="fw-bold">Easy Payments</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,182 @@
+body {
+    /* font-family: 'Poppins', sans-serif !important; */
+    margin: 0 !important;
+    padding: 0 !important;
+    /* background: linear-gradient(135deg, #1e1e2f, #2a2a3d);  */
+    /* color: white; */
+}
+
+/* 🌟 Dashboard Layout */
+.dashboard {
+    display: flex !important;
+    height: 100vh !important;
+}
+.sidebar {
+    all: unset;
+    width: 230px !important;
+    background: linear-gradient(135deg, #2a2a3d, #1e1e2f) !important;
+    backdrop-filter: blur(15px) !important;
+    padding: 20px !important;
+    position: fixed !important;
+    height: 100% !important;
+    transition: width 0.3s ease-in-out !important;
+    border-radius: 10px !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2) !important;
+    height: 100vh !important;
+ 
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: auto !important; 
+    max-height: 100vh !important; 
+    overflow-x: hidden !important; 
+} 
+.sidebar:hover {
+    width: 235px !important;
+    box-shadow: 0 10px 25px rgba(110, 99, 99, 0.3) !important;
+}
+/* 🌟 Sidebar Logo */
+.sidebar .logo {
+    text-align: center !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: #ff7eb3 !important;
+    margin-bottom: 15px !important;
+}
+/* 🌟 Horizontal Line Below Heading */
+.sidebar hr {
+    border: none !important;
+    height: 1.5px !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    margin: 10px 0 !important;
+}
+.sidebar .nav-links li a i {
+    margin-right: 12px !important;
+    font-size: 22px !important; /* Thoda bada aur clear */
+    color: #ff7eb3 !important;  /* Pinkish Highlight color */
+    background: rgba(255, 255, 255, 0.1) !important; /* halka circle effect */
+    padding: 8px !important;
+    border-radius: 50% !important;
+    transition: background 0.3s, transform 0.3s !important;
+}
+
+.sidebar .nav-links li a:hover i {
+    background: rgba(255, 255, 255, 0.3) !important; /* Hover effect */
+    transform: scale(1.2) !important; /* Hover zoom */
+}
+.sidebar::-webkit-scrollbar {
+    width: 9px;
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+/* 🌟 Sidebar Navigation */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.nav-links li {
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.2s;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* font-weight: bold; */
+}
+.material-icons {
+    font-size: 24px; /* icon ka size */
+}
+/* 🌟 Sidebar Hover Effects */
+.nav-links li:hover, .nav-links li.active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    width: 100%;
+}
+
+.nav-links li a i {
+    margin-right: 12px;
+    font-size: 20px;
+    color: #ff7eb3;
+}
+
+/* 🌟 Logout Button */
+.logout-btn {
+    width: 100% !important;  /* ✅ Sidebar ke andar rahega */
+    text-align: center !important;
+    padding: 12px !important;
+    background: #ff4b5c !important;
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: background 0.3s, transform 0.2s !important;
+
+    /* ✅ Ensures Logout Button Stays at Bottom */
+    margin-bottom: 25px !important;
+}
+
+.logout-btn:hover {
+    background: #ff2e44 !important;
+    transform: scale(1.05) !important;
+}
+
+.logout-btn i { 
+    margin-right: 8px !important;
+    font-size: 18px !important;
+}
+
+/* 🌟 Main Content */
+.main-content {
+    margin-left: 260px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.topbar { 
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: rgba(0, 123, 255, 0.2) !important; /* Yeh color change kar sakte hain */
+    padding: 15px 25px !important;
+    margin-left: 15px !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.user-info:hover {
+    color: #ff7eb3;
+}
+
+.user-info i {
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+
