@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap, throwError } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 // import { SocialAuthService, GoogleLoginProvider, SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
@@ -10,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private apiurl ='http://192.168.0.117:5000/Server/api/Auth/';// 'https://localhost:44312/api/Auth/';
+  private apiurl = `${environment.apiUrl}/Auth/`; //'http://192.168.0.117:5000/Server/api/Auth/';// 'https://localhost:44312/api/Auth/';
 
   authnticatio(endpoint: any, payload: any): Observable<any> {
     const api = this.apiurl + endpoint;

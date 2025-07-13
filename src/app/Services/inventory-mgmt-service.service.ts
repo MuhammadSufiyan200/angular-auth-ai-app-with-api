@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InventoryMgmtServiceService {
 // inventory-mgmt.service.ts
-  private baseUrl = 'http://192.168.0.117:5000/Server/api/Inventory_MGMT_/';
+  private baseUrl = `${environment.apiUrl}/Auth/`;//'http://192.168.0.117:5000/Server/api/Inventory_MGMT_/';
 
   constructor(private http: HttpClient) {}
 
