@@ -45,7 +45,7 @@ export class UserHomeComponent implements OnInit {
     this.loadProducts();
     this.loadCategories();
   }
-  baseImageUrl = `${environment.apiUrl}`; 
+  baseImageUrl = `${environment.apiImg}`; 
   loadProducts(): void {
     this.isLoading = true;
     this.inventoryService.getAllInventoryItem().subscribe({
@@ -55,7 +55,7 @@ export class UserHomeComponent implements OnInit {
           console.log(item.imageUrl); // See the exact image URL
           return {
             ...item,
-            imageUrl: this.baseImageUrl + item.img,
+            imageUrl: this.baseImageUrl + '/' + item.img,
              quantity: 1,
              currentRating: 0,
              hoverRating: 0,
