@@ -12,6 +12,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { environment } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-user-home',
@@ -44,7 +45,7 @@ export class UserHomeComponent implements OnInit {
     this.loadProducts();
     this.loadCategories();
   }
-  baseImageUrl = 'http://192.168.0.117:5000/Server/'; 
+  baseImageUrl = `${environment.apiUrl}`; 
   loadProducts(): void {
     this.isLoading = true;
     this.inventoryService.getAllInventoryItem().subscribe({
