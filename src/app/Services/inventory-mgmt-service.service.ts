@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class InventoryMgmtServiceService {
 // inventory-mgmt.service.ts
-  private baseUrl = `${environment.apiUrl}/Auth/`;//'http://192.168.0.117:5000/Server/api/Inventory_MGMT_/';
+  private baseUrl = `${environment.apiUrl}/Inventory_MGMT_/`;//'http://192.168.0.117:5000/Server/api/Inventory_MGMT_/';
 
   constructor(private http: HttpClient) {}
 
